@@ -7,7 +7,7 @@ public class PlayoffTournament {
 	static PrintWriter pw = new PrintWriter(System.out);
 	
 	public static void main(String[] args) throws IOException {
-		int k = readInt(), n = (int)Math.pow(2, k);
+		int k = readInt(), n = 1 << k;
 		char[] ch = new char[n];
 		int[] dp = new int[n], parent = new int[n];
 		@SuppressWarnings("unchecked")
@@ -20,8 +20,8 @@ public class PlayoffTournament {
 		
 		int cnt = k - 1;
 		for (int i = 1; i < n - 1;) {
-			int idx = (int) (i + Math.pow(2, cnt));
-			for (int j = i; j < i + Math.pow(2, cnt); j += 2) {
+			int idx = i + (1 << cnt);
+			for (int j = i; j < i + (1 << cnt); j += 2) {
 				if (ch[idx] == '0') dp[idx] = dp[j];
 				else if (ch[idx] == '1') dp[idx] = dp[j + 1];
 				else dp[idx] = dp[j] + dp[j + 1];
@@ -31,7 +31,7 @@ public class PlayoffTournament {
 				child[idx].add(j + 1);
 				idx ++;
 			}
-			i += Math.pow(2, cnt);
+			i += 1 << cnt;
 			cnt --;
 		}
 		
@@ -41,11 +41,11 @@ public class PlayoffTournament {
 			char c = readCharacter();
 			
 			if (c != '?') {
-				if (p <= Math.pow(2, k - 1)) dp[p] = 1;
+				if (p <= 1 << k - 1) dp[p] = 1;
 				else if (c == '0') dp[p] = dp[child[p].get(0)];
 				else dp[p] = dp[child[p].get(1)];
 			} else {
-				if (p <= Math.pow(2, k - 1)) dp[p] = 2;
+				if (p <= 1 << k - 1) dp[p] = 2;
 				else dp[p] = dp[child[p].get(0)] + dp[child[p].get(1)];
 			}
 			ch[p] = c;
