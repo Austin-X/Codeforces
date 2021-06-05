@@ -9,26 +9,24 @@ public class PlayoffTournament {
 	public static void main(String[] args) throws IOException {
 		int k = readInt(), n = 1 << k;
 		char[] ch = new char[n];
-		int[] dp = new int[n], parent = new int[n];
-		@SuppressWarnings("unchecked")
-		ArrayList<Integer>[] child = new ArrayList[n];
-		for (int i = 1; i < n; i ++) child[i] = new ArrayList<Integer>();
+		int[] f = new int[n], parent = new int[n];
+		int[][] child = new int[n][2];
 		
 		String str = readLine();
 		for (int i = 1; i < n; i ++) ch[i] = str.charAt(i - 1);
-		for (int i = 1; i <= Math.pow(2, k - 1); i ++) dp[i] = ch[i] == '?' ? 2 : 1;
+		for (int i = 1; i <= Math.pow(2, k - 1); i ++) f[i] = ch[i] == '?' ? 2 : 1;
 		
 		int cnt = k - 1;
 		for (int i = 1; i < n - 1;) {
 			int idx = i + (1 << cnt);
 			for (int j = i; j < i + (1 << cnt); j += 2) {
-				if (ch[idx] == '0') dp[idx] = dp[j];
-				else if (ch[idx] == '1') dp[idx] = dp[j + 1];
-				else dp[idx] = dp[j] + dp[j + 1];
+				if (ch[idx] == '0') f[idx] = f[j];
+				else if (ch[idx] == '1') f[idx] = f[j + 1];
+				else f[idx] = f[j] + f[j + 1];
 				parent[j] = idx;
 				parent[j + 1] = idx;
-				child[idx].add(j);
-				child[idx].add(j + 1);
+				child[idx][0] = j;
+				child[idx][1] = j + 1;
 				idx ++;
 			}
 			i += 1 << cnt;
@@ -41,23 +39,23 @@ public class PlayoffTournament {
 			char c = readCharacter();
 			
 			if (c != '?') {
-				if (p <= 1 << k - 1) dp[p] = 1;
-				else if (c == '0') dp[p] = dp[child[p].get(0)];
-				else dp[p] = dp[child[p].get(1)];
+				if (p <= 1 << k - 1) f[p] = 1;
+				else if (c == '0') f[p] = f[child[p][0]];
+				else f[p] = f[child[p][1]];
 			} else {
-				if (p <= 1 << k - 1) dp[p] = 2;
-				else dp[p] = dp[child[p].get(0)] + dp[child[p].get(1)];
+				if (p <= 1 << k - 1) f[p] = 2;
+				else f[p] = f[child[p][0]] + f[child[p][1]];
 			}
 			ch[p] = c;
 			
 			int j = p;
 			while (j != n - 1) {
-				if (ch[parent[j]] == '0') dp[parent[j]] = dp[child[parent[j]].get(0)];
-				else if (ch[parent[j]] == '1') dp[parent[j]] = dp[child[parent[j]].get(1)];
-				else dp[parent[j]] = dp[child[parent[j]].get(0)] + dp[child[parent[j]].get(1)];
+				if (ch[parent[j]] == '0') f[parent[j]] = f[child[parent[j]][0]];
+				else if (ch[parent[j]] == '1') f[parent[j]] = f[child[parent[j]][1]];
+				else f[parent[j]] = f[child[parent[j]][0]] + f[child[parent[j]][1]];
 				j = parent[j];
 			}
-			pw.println(dp[n - 1]);
+			pw.println(f[n - 1]);
 		}
 		pw.close();
 	}
