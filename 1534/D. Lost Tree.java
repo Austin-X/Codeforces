@@ -13,7 +13,7 @@ public class LostTree {
 		
 		System.out.println("? " + 1);
 		System.out.flush();
-		int red = 0, black = 0;
+		int c1 = 0, c2 = 0;
 		int[] d = new int[n + 1];
 		for (int i = 1; i <= n; i ++) {
 			d[i] = readInt();
@@ -21,10 +21,10 @@ public class LostTree {
 				adj[1][i] = true;
 				adj[i][1] = true;
 			}
-			if (d[i] % 2 == 0) red ++;
-			else black ++;
+			if (d[i] % 2 == 0) c1 ++;
+			else c2 ++;
 		}
-		if (red <= black) { for (int i = 2; i <= n; i ++) if (d[i] % 2 == 0) check[i] = true; }
+		if (c1 <= c2) { for (int i = 2; i <= n; i ++) if (d[i] % 2 == 0) check[i] = true; }
 		else { for (int i = 2; i <= n; i ++) if (d[i] % 2 == 1) check[i] = true; }
 		
 		for (int i = 2; i <= n; i ++) {
