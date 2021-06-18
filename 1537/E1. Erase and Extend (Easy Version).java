@@ -17,7 +17,7 @@ public class EraseAndExtendEasyVersion {
 					break;
 				}
 			} else {
-				if (s.substring(0, i).compareTo(s.substring(i, s.length())) < 0) {
+				if (s.substring(0, s.length() - i).compareTo(s.substring(i, s.length())) <= 0) {
 					s = s.substring(0, i) + s.substring(0, i);
 					break;
 				}
