@@ -17,11 +17,12 @@ public class EraseAndExtendHardVersion {
 				else ans = i;
 				break;
 			} else if (s.charAt(i) == s.charAt(idx)) {
-				if (repeat == -1) repeat = i;
+				if (repeat == -1) { repeat = i; ans = i; }
 				idx ++;
 				if (idx == repeat) idx = 0;
 			} else if (repeat != -1 && s.charAt(i) < s.charAt(idx)) {
 				repeat = i + 1;
+				ans = repeat;
 				idx = 0;
 			}
 		}
