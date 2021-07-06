@@ -11,17 +11,16 @@ public class StrangeFunction {
 		
 		while (t-- > 0) {
 			long n = readLong();
-			long even, odd;
-			if (n % 2 == 0) { even = n / 2; odd = n / 2; }
-			else { even = n / 2; odd = n / 2 + 1;  }
-			long ans = (even * 3 + odd * 2) % MOD, cur = 6, mult = 3;
 
-			while (cur <= n) {
-				ans -= (n / cur) * mult;
-				ans += (n / cur) * (mult + 1);
+			int i = 2;
+			long val = 1, ans = 0;
+			
+			while (val <= n) {
+				ans += i * (n / val);
+				val = lcm(val, i);
+				i ++;
+				ans -= (i - 1) * (n / val);
 				ans %= MOD;
-				mult ++;
-				cur = lcm(cur, mult);
 			}
 			System.out.println(ans);
 		}
