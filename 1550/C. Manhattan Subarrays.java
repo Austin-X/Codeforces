@@ -16,7 +16,9 @@ public class ManhattanSubarrays {
 			
 			int ll = 0, rr = 0;
 			while (rr < n) {
+				if (rr - ll == 4) { ll ++; continue; }
 				if (rr - ll <= 1) { ans += rr - ll + 1; rr ++; continue; }
+				
 				boolean flag = true;
 				outerloop: for (int j = ll; j < rr; j ++) {
 					for (int k = j + 1; k < rr; k ++) {
