@@ -7,7 +7,6 @@ public class ArrayStabilizationGCDVersion {
 	static PrintWriter out = new PrintWriter(System.out);
 	
 	static int[] STree;
-	
 	public static void main(String[] args) throws IOException {
 		int t = readInt();
 		
