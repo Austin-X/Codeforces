@@ -10,40 +10,38 @@ public class Pursuit {
 		int t = readInt();
 		
 		while (t-- > 0) {
-			int n = readInt(), k = (int) (n - Math.floor(n / 4)), sumA = 0, sumB = 0;
-		    Integer[] a = new Integer[n], b = new Integer[n];
-			for (int i = 0; i < n; i ++) a[i] = readInt();
-			for (int i = 0; i < n; i ++) b[i] = readInt();
-			Arrays.parallelSort(a); Arrays.parallelSort(b);
+			int n = readInt(), k = n - n / 4;
+		    int[] a = new int[101], b = new int[101];
+			for (int i = 0; i < n; i ++) a[readInt()] ++;
+			for (int i = 0; i < n; i ++) b[readInt()] ++;
 
-			for (int i = n - k; i < n; i ++) { sumA += a[i]; sumB += b[i]; }
-			int temp = n + 1, idx = n - k - 1, aIdx = n - k, ans = 0, diff = sumB - sumA;
-			
-			while (diff > 0) {
-				if (idx < 0 && aIdx >= n) break;
-				
-				if (temp % 4 == 0) { 
-					diff -= 100; 
-					if (aIdx < n) { diff += a[aIdx]; aIdx ++; }
-					else diff += 100;
-				} else { 
-					diff -= 100; 
-					if (idx >= 0) {
-						diff += b[idx]; 
-						idx --; 
-					}
-				}
-				temp ++;
+			int sumA = calc(k, a), sumB = calc(k, b), ans = 0;
+			while (sumA < sumB) {
+				a[100] ++;
+				b[0] ++;
+				n ++;
+				k = n - n / 4;
+				sumA = calc(k, a); sumB = calc(k, b);
 				ans ++;
-			}
-			if (diff > 0) {
-				int x = (int)Math.ceil(diff / 100d), y = x / 4;
-				ans += x + y;
 			}
 			System.out.println(ans);
 		}
 	}
 
+	static int calc (int k, int[] a) {
+		int sum = 0, cnt = 0;
+		for (int i = 100; i >= 0; i --) {
+			if (cnt + a[i] >= k) {
+				sum += (k - cnt) * i;
+				break;
+			} else {
+				sum += a[i] * i;
+				cnt += a[i];
+			}
+		}
+		return sum;
+	}
+	
 	static String next() throws IOException {
 		while (st == null || !st.hasMoreTokens()) 
 			st = new StringTokenizer(br.readLine().trim());
