@@ -17,7 +17,7 @@ public class Cobb {
 			
 			for (int i = idx; i <= n; i ++)
 				for (int j = i + 1; j <= n; j ++) 
-					ans = Math.max(ans, (long)i * j - k * (a[i] | a[j]));
+					ans = Math.max(ans, 1L * i * j - k * (a[i] | a[j]));
         
 			System.out.println(ans);
 		}
