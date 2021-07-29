@@ -13,7 +13,7 @@ public class Cherry {
 			long ans = 0;
 			int[] a = new int[n];
 			for (int i = 0; i < n; i ++) a[i] = readInt();
-			for (int i = 0; i < n - 1; i ++) ans = Math.max(ans, (long)a[i] * a[i + 1]);
+			for (int i = 0; i < n - 1; i ++) ans = Math.max(ans, 1L * a[i] * a[i + 1]);
 			System.out.println(ans);
 		}
 	}
