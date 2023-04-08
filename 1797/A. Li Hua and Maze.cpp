@@ -4,8 +4,7 @@ typedef long long ll;
 
 void solve() {
     int n, m, x1, y1, x2, y2;
-    cin >> n >> m;
-    cin >> x1 >> y1 >> x2 >> y2;
+    cin >> n >> m >> x1 >> y1 >> x2 >> y2;
     int f1 = 4, f2 = 4;
     if (x1 == 1 || x1 == n) f1 --;
     if (y1 == 1 || y1 == m) f1 --;
