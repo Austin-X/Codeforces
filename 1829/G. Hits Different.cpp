@@ -6,11 +6,11 @@ const int MAX_R = 1415, MN = 1e6 + 1;
 
 int n;
 ll psa[MAX_R][MAX_R];
-int row[MN], col[MN];
+ll ans[MN];
 
 void solve() {
     cin >> n;
-    cout << psa[row[n]][col[n]] << '\n';
+    cout << ans[n] << '\n';
 }
 
 void precompute() {
@@ -19,8 +19,7 @@ void precompute() {
         for (int j = 1; j <= i; j ++) {
             if (val > 1e6) return;
             psa[i - j + 1][j] = psa[i - j][j] + psa[i - j + 1][j - 1] - psa[i - j][j - 1] + (val * val);
-            row[val] = i - j + 1;
-            col[val] = j;
+            ans[val] = psa[i - j + 1][j];
             val ++;
         }
     }
