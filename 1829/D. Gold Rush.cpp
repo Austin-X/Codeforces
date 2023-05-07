@@ -2,26 +2,17 @@
 #define rep(x,y,z) for(ll x=y;x<=z;x++)
 using namespace std;
 typedef long long ll;
-const int MN = 1e7 + 1;
 
-bool vis[MN];
-
-void rec(int x) {
-    if (vis[x]) return;
-    vis[x] = true;
-    if (x % 3 == 0) {
-        int y = x / 3;
-        rec(y);
-        rec(y * 2);
-    }
+bool ok(int n, int m) {
+    if (n == m) return true;
+    if (n % 3 != 0) return false;
+    return ok(n / 3, m) || ok(n / 3 * 2, m);
 }
 
 void solve() {
     int n, m;
     cin >> n >> m;
-    fill(vis, vis + n + 1, false);
-    rec(n);
-    cout << (vis[m] ? "YES\n" : "NO\n");
+    cout << (ok(n, m) ? "YES" : "NO") << '\n';
 }
 
 int main() {
