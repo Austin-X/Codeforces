@@ -4,19 +4,19 @@ using namespace std;
 typedef long long ll;
 
 void solve() {
-    int n, mx = 0, cur = 0;
+    int n;
     cin >> n;
+    int ans = 0, cnt = 0;
     for (int i = 0, x; i < n; i ++) {
         cin >> x;
         if (x == 0) {
-            cur ++;
+            cnt ++;
         } else {
-            mx = max(mx, cur);
-            cur = 0;
+            ans = max(ans, cnt);
+            cnt = 0;
         }
     }
-    mx = max(mx, cur);
-    cout << mx << '\n';
+    cout << max(ans, cnt) << '\n';
 }
 
 int main() {
