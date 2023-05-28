@@ -19,8 +19,6 @@ void solve() {
                 if (diff / j != j) freq[diff / j] ++;
             }
         }
-        // for (int x: freq) cout << x << ", ";
-        // cout << '\n';
     }
 
     int ans = 0;
